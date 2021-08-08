@@ -1,0 +1,5 @@
+type Pagination {
+  limit: Int
+  page: Int
+  total: Int
+}

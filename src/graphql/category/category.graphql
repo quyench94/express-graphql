@@ -1,0 +1,24 @@
+type Category {
+  id: ID!
+  name: String
+  code: String
+}
+type Categories {
+  items: [Category],
+  pagination: Pagination
+}
+
+input CategoryInput {
+  title: String
+  code: String
+  name: String
+}
+
+type Query {
+  categories: Categories
+  category(id: ID!): Category 
+}
+
+type Mutation {
+  categoryCreate(input: CategoryInput): Category
+}

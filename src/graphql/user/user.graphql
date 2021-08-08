@@ -1,0 +1,44 @@
+type User {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  isPublisher: Boolean
+}
+type Users {
+  items: [User],
+  pagination: Pagination
+}
+
+type Publishers {
+  items: [User],
+  pagination: Pagination
+}
+
+input UserRegister {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+}
+
+input UserLogin {
+  email: String
+  password: String
+}
+type UserLoginOutput {
+  id: ID!
+  jwtToken: String
+}
+
+type Query {
+  users(limit: Int, page: Int, isPublisher: Boolean): Users
+  user(id: ID!): User 
+  publishers(limit: Int, page: Int): Users
+  publisher(id: ID!): User 
+}
+
+type Mutation {
+  register(input: UserRegister): User
+  login(input: UserLogin): UserLoginOutput
+}

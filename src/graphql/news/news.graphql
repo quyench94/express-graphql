@@ -1,0 +1,32 @@
+type News {
+  id: ID!
+  title: String
+  description: String
+  status: Boolean
+  publisher: User
+  category: Category
+  createdAt: String
+  updatedAt: String
+}
+type NewsList {
+  items: [News],
+  pagination: Pagination
+}
+
+input NewsInput {
+  title: String!
+  description: String
+  status: Boolean
+  categoryId: ID!
+  createdAt: String
+  updatedAt: String
+}
+
+type Query {
+  newsList(limit: Int, page: Int, publisherId: Boolean): NewsList
+  newsRead(id: ID!): News 
+}
+
+type Mutation {
+  newsCreate(input: NewsInput): News
+}
