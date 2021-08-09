@@ -1,9 +1,0 @@
-version: '2'
-services:
-  app:
-    image: "node:14"
-    working_dir: /src
-    volumes:
-      - .:/src
-    
-    command: "tail -f /dev/null"
