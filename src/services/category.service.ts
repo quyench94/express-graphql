@@ -6,9 +6,6 @@ import BaseService from "./base.services";
 import { Category } from "../interfaces/category.interface";
 
 class CategoryService extends BaseService {
-  _salt = 10;
-  _jwtSecret = config.jwtSecret;
-  dataLoader: DataLoader<string, CategoryModel>
   constructor( ) {
     super();
     

@@ -8,9 +8,6 @@ import { User } from "../interfaces/user.interface";
 import queue from "../core/queue";
 
 class NewsService extends BaseService {
-  _salt = 10;
-  _jwtSecret = config.jwtSecret;
-  dataLoader: DataLoader<string, NewsModel>
   constructor( ) {
     super();
     
