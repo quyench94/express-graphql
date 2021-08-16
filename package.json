@@ -45,7 +45,8 @@
     "start": "node --loader ts-node/esm ./src/app.ts",
     "local": "nodemon ./src/app.ts --ignore data/*",
     "build": "./node_modules/typescript/bin/tsc && cp src/graphql/**/*.graphql  dist/graphql/",
-    "test": "mocha -r ts-node/register \"src/test/unit/**/*.ts\""
+    "test": "mocha -r ts-node/register \"src/test/unit/**/*.ts\"",
+    "integration_test": "mocha -r ts-node/register \"src/test/integration/**/*.ts\""
   },
   "author": "",
   "license": "ISC",
