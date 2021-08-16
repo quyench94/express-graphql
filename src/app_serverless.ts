@@ -13,8 +13,7 @@ bootstrap.initMiddleware(app);
 bootstrap.initRouters(app);
 bootstrap.initCORS(app);
 bootstrap.initErrorHandler(app);
-bootstrap.initGraphQL(app);
- 
+const server = bootstrap.initApolloLambda(app);
 background.start();
 
-export const handler = require('serverless-http')(app)
+export const handler = server.createHandler();

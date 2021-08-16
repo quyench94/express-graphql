@@ -1,5 +1,6 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer as ApolloServerLambda, gql } from 'apollo-server-lambda';
 import CoreBase from "./base";
 import Database from "./database";
 import config from "../config/env/config";
@@ -69,8 +70,8 @@ class Bootstrap extends CoreBase {
     const server = new ApolloServer({
       schema: schemas,
       context: async ({req}: {req: express.Request}) => {
-        const request = req as CustomRequest || {};
         const loaders = dataLoaders()
+        const request = req as CustomRequest ;
         request.loaders = loaders;
         return request;
       },
@@ -79,6 +80,37 @@ class Bootstrap extends CoreBase {
       server.applyMiddleware({ app });
     })
     app.graphqlServer = server;
+  }
+
+  public initApolloLambda(app: App) {
+    const dataLoaders = () => {
+      const newsService = new NewsService()
+      const categoryService = new CategoryService()
+      const userService = new UserService()
+      return {
+        newsLoaders: newsService.getDataloader(),
+        userLoaders: userService.getDataloader(),
+        categoryLoaders: categoryService.getDataloader(),
+      };
+    };
+    const server = new ApolloServerLambda({
+      schema: schemas,
+      context:  ({ event, context, express }) => {
+        const loaders = dataLoaders()
+        const request = express.req as CustomRequest ;
+        request.loaders = loaders;
+        return {
+          headers: event.headers,
+          functionName: context.functionName,
+          event,
+          context,
+          loaders,
+          auth: request.auth,
+          expressRequest: request,
+        };
+      },
+    });
+    return server;
   }
   public initGraphQL(app: App) {
     app.use('/graphql', graphqlHTTP({
