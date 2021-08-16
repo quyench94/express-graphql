@@ -10,6 +10,7 @@ import NewsService from '../services/news.service';
 import CategoryService from '../services/category.service';
 import UserService from '../services/user.service';
 import { App, CustomRequest } from '../interfaces/common.interface';
+import { graphqlHTTP } from 'express-graphql'
 
 class Bootstrap extends CoreBase {
   database: Database
@@ -54,7 +55,7 @@ class Bootstrap extends CoreBase {
     })
   }
 
-  public initGraphQL(app: App) {
+  public initApollo(app: App) {
     const dataLoaders = () => {
       const newsService = new NewsService()
       const categoryService = new CategoryService()
@@ -79,6 +80,13 @@ class Bootstrap extends CoreBase {
     })
     app.graphqlServer = server;
   }
+  public initGraphQL(app: App) {
+    app.use('/graphql', graphqlHTTP({
+      schema: schemas,
+      rootValue: {},
+      graphiql: true,
+    }));
+  }
 
   public initMiddleware(app: App) {
     app.use(middleware.defaultRequest)
@@ -87,3 +95,4 @@ class Bootstrap extends CoreBase {
 
 }
 export default new Bootstrap();
+

@@ -33,6 +33,7 @@ class Database extends CoreBase {
       logging: false,
       models: [
         process.env.PWD + '/**/*.model.ts',
+        process.env.PWD + '/**/*.model.js'
       ]
     });
     // this.sequelize.sync({force: false, alter: true})

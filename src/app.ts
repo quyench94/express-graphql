@@ -13,7 +13,7 @@ bootstrap.initMiddleware(app);
 bootstrap.initRouters(app);
 bootstrap.initCORS(app);
 bootstrap.initErrorHandler(app);
-bootstrap.initGraphQL(app);
+bootstrap.initApollo(app);
 
 background.start();
 
