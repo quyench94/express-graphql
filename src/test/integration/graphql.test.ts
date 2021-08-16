@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'test';
 
-import app from '../../app';
+import {appClient} from '../../app';
 import NewsService from '../../services/news.service';
 import CategoryService from '../../services/category.service';
 import UserService from '../../services/user.service';
@@ -12,7 +12,7 @@ describe("Integration: Graphql integration test", function () {
   let newsService = new NewsService()
   let categoryService = new CategoryService()
   let userService = new UserService()
-  let graphqlServer = app.graphqlServer;
+  let graphqlServer = appClient.graphqlServer;
   const data = {
     "registerInput": {
       "email": "quyench@gmail.com13",

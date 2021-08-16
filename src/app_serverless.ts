@@ -14,9 +14,7 @@ bootstrap.initRouters(app);
 bootstrap.initCORS(app);
 bootstrap.initErrorHandler(app);
 bootstrap.initGraphQL(app);
-
+ 
 background.start();
 
-app.listen(4000)
-
-export const appClient = app;
+export const handler = require('serverless-http')(app)

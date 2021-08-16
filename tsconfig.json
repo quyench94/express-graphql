@@ -16,7 +16,7 @@
         "node_modules/*",
       ]
     },
-    "types": ["mocha", "@wdio/mocha-framework"]
+    "types": ["mocha"]
   },
   "include": [
     "./src/**/*.ts",
