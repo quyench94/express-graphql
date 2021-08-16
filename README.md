@@ -54,13 +54,13 @@ Design and implement a GraphQL API for a news-system that allows:
 
 - [x] API documentation can be generated using your API design
 
-- [x][Cover 50%] Unit tests should be written and green. 
+- [x] [Cover 50%] Unit tests should be written and green. 
 
 ## Submission:
 
 - [x] Push your project onto a Github / Gitlab repository
 
-- [x][AWS Lambda] Deploy the system onto a platform of your choice. Be able to deploy your project to a serverless platform (such as AWS Lambda) is a big plus.
+- [x] [AWS Lambda] Deploy the system onto a platform of your choice. Be able to deploy your project to a serverless platform (such as AWS Lambda) is a big plus.
 ---
 
 # Author
