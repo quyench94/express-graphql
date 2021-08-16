@@ -11,3 +11,13 @@ export interface News {
   publisherId: string
   publisher: User
 }
+
+export interface NewsNotifyPublisher {
+  headers: {
+    requestId: string
+  },
+  body: {
+    newId: number
+    publisherId: number
+  }
+}

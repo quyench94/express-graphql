@@ -10,13 +10,15 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "allowJs": true,
+    "sourceMap": true,
     "paths": {
       "*": [
         "node_modules/*",
       ]
-    }
+    },
+    "types": ["mocha", "@wdio/mocha-framework"]
   },
   "include": [
-    "src/**/*"
+    "./src/**/*.ts",
   ]
 }

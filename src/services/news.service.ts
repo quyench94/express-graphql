@@ -5,15 +5,31 @@ import config from "../config/env/config";
 import BaseService from "./base.services";
 import { News } from "../interfaces/news.interface";
 import { User } from "../interfaces/user.interface";
+import notify_publisher from "../background_tasks";
 import queue from "../core/queue";
 
 class NewsService extends BaseService {
+  dataLoader: DataLoader<string, NewsModel>
+  
   constructor( ) {
     super();
     
   }
 
-  async listNews(params: any, options?: any) {
+  getDataloader() {
+    this.dataLoader = new DataLoader((ids) => {
+      return NewsModel.findAll({
+        where: {
+          id: {
+            [Op.in]: ids
+          }
+        }
+      })
+    })
+    return this.dataLoader;
+  }
+
+  async listNews(params: any, options: any = {}) {
     const isPublisher = this.isPublisher(options.auth)
     const where:any = {};
     
@@ -33,7 +49,7 @@ class NewsService extends BaseService {
     }
   }
   
-  async createNews(paramNews: NewsModel, options?: any) {
+  async createNews(paramNews: NewsModel, options: any = {}) {
     const isPublisher = this.isPublisher(options.auth)
     if (!isPublisher) {
       throw new Error('You are not publisher')
@@ -55,11 +71,12 @@ class NewsService extends BaseService {
     return news;
   }
 
-  async callbackNewsRead(news: NewsModel) {
+  async callbackNewsRead(news: NewsModel, options: any = {}) {
     // TODO:
     // - load publisher callback info and push callback to queue to process notify
     const body = {
       headers:{
+        requestId: options.requestId
       },
       body: {
         newId: news.id,

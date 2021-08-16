@@ -1,6 +1,19 @@
+import { ApolloServer } from "apollo-server-express";
+import express from "express";
+import { User } from "./user.interface";
+
 export interface Pagination {
   limit: number,
   page: number,
   total: number
 }
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+export interface App extends express.Express {
+  graphqlServer: ApolloServer
+  loaders: any 
+}
+
+export interface CustomRequest extends express.Request {
+  auth: User | boolean
+  loaders?: any
+  requestId?: string
+}

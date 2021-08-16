@@ -22,7 +22,6 @@ export default {
   Mutation: {
     register: (obj:any, args:any) => {
       return userService.register(args.input)
-      
     },
     login: (obj:any, args:any) => {
       return userService.login(args.input)

@@ -11,6 +11,7 @@ const typeDefs = mergeTypeDefs(typesArray);
 const resolvers = mergeResolvers([userResolvers, newsResolvers, categoryResolvers]);
 
 
+
 export default mergeSchemas({
   schemas: [],
   typeDefs: typeDefs,

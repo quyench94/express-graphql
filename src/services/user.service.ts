@@ -7,6 +7,8 @@ import * as jwt from 'jsonwebtoken';
 import config from "../config/env/config";
 import bootstrap from "../core/bootstrap";
 import BaseService from "./base.services";
+import * as helpers from  '../services/helper.services';
+
 const { resolver } = require("graphql-sequelize");
 
 class UserService extends BaseService {
@@ -19,16 +21,17 @@ class UserService extends BaseService {
     
   }
 
-  async dataloader(keys: string[]) {
-    this.dataLoader = new DataLoader((keys) => {
+  getDataloader() {
+    this.dataLoader = new DataLoader((ids) => {
       return UserModel.findAll({
         where: {
           id: {
-            [Op.in]: keys
+            [Op.in]: ids
           }
         }
       })
     })
+    return this.dataLoader;
   }
 
   async getUser({id, isPublisher}: any, options?: any) {
@@ -38,6 +41,16 @@ class UserService extends BaseService {
     if (isPublisher != undefined) {
       where.isPublisher = true
     }
+    return await UserModel.findOne({
+      where: where,
+    })
+  }
+
+  async getPublisher({id}: any, options?: any) {
+    const where:any = {
+      id,
+      isPublisher: true
+    };
     return await UserModel.findOne({
       where: where,
     })
@@ -60,7 +73,7 @@ class UserService extends BaseService {
   }
 
   async register(paramRegister: UserModel) {
-    paramRegister.password = await bcrypt.hash(paramRegister.password, this._salt);
+    paramRegister.password = await helpers.hashPassword(paramRegister.password, this._salt)
     const user = await UserModel.create(paramRegister)
       .catch(e => {
         if (String(e.name).startsWith('SequelizeUniqueConstraintError')) {
@@ -79,7 +92,7 @@ class UserService extends BaseService {
     });
     if (!user) throw new Error('Email does not exists')
     const { password: userPassword = '' } = user.previous();
-    const isPasswordMatch = await bcrypt.compare(password, userPassword);
+    const isPasswordMatch = await helpers.comparePasswordHashed(userPassword, password)
     if (!isPasswordMatch) throw new Error('Invalid email or password')
     user.jwtToken = jwt.sign({ id: user.id, email }, this._jwtSecret, { expiresIn: "3h"});
     return user;

@@ -28,6 +28,9 @@ export default class UserModel extends Model<UserModel> {
   @Column({type: DataType.BOOLEAN})
   isPublisher: boolean;
 
+  @Column({type: DataType.STRING})
+  publisherWebhook: string;
+
   @Default(true)
   @Column({type: DataType.INTEGER})
   status: number;

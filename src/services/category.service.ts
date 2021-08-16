@@ -6,11 +6,25 @@ import BaseService from "./base.services";
 import { Category } from "../interfaces/category.interface";
 
 class CategoryService extends BaseService {
+  dataLoader: DataLoader<string, CategoryModel>
+
   constructor( ) {
     super();
     
   }
 
+  getDataloader() {
+    this.dataLoader = new DataLoader((ids) => {
+      return CategoryModel.findAll({
+        where: {
+          id: {
+            [Op.in]: ids
+          }
+        }
+      })
+    })
+    return this.dataLoader;
+  }
 
   async getCategory(id: any, options?: any) {
     const where:any = {

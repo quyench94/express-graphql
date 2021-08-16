@@ -30,9 +30,9 @@ class Database extends CoreBase {
       password: this.config.pass,
       port: this.config.port,
       dialect: 'mysql',
+      logging: false,
       models: [
         process.env.PWD + '/**/*.model.ts',
-        process.env.PWD + '/**/*.model.js'
       ]
     });
     // this.sequelize.sync({force: false, alter: true})
