@@ -44,23 +44,23 @@ Design and implement a GraphQL API for a news-system that allows:
 
 ## Webhook:
 
-- [ ] Every time news is read by someone, the system will callback to a pre-registered endpoint of the Publisher to notify them.
+- [x] Every time news is read by someone, the system will callback to a pre-registered endpoint of the Publisher to notify them.
 
 ## Technical requirements
 
 - [x] The API system should be written in TypeScript (you can pick any framework of your choice)
 
-- [ ] Should using GraphQL with DataLoader pattern
+- [x] Should using GraphQL with DataLoader pattern
 
 - [x] API documentation can be generated using your API design
 
-- [ ] Unit tests should be written and green
+- [x][Cover 50%] Unit tests should be written and green. 
 
 ## Submission:
 
 - [x] Push your project onto a Github / Gitlab repository
 
-- [x] Deploy the system onto a platform of your choice. Be able to deploy your project to a serverless platform (such as AWS Lambda) is a big plus.
+- [x][AWS Lambda] Deploy the system onto a platform of your choice. Be able to deploy your project to a serverless platform (such as AWS Lambda) is a big plus.
 ---
 
 # Author
