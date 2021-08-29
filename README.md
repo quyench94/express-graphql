@@ -1,14 +1,6 @@
-# express-graplhql
+# express-graphql
 
 # Summary
-This project build base on requirement https://docs.bizzi.vn/share/7d1d0ce0-f0ee-4087-aba3-61e152f37d99
-
-GraphQL docs: https://6swtpjtcog.execute-api.ap-southeast-1.amazonaws.com/dev/graphql
-
-# Where am i getting stuck
-- Some libraries does not support typescript -> Change other library
-- Library bcrypt install from MacOS does not work with LinuxOS on AWS Lambda -> setup docker linux and re-build library to get bcrypt support Linux OS
-
 # Requirement
 
 ## Before use
